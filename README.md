@@ -1,6 +1,7 @@
 # portscanx
-
-![portscanx logo](https://i.imgur.com/wdyyjL6.png)
+<p align="center">
+    <img src="https://imgur.com/ZgMegPb.png" alt="portscanx logo">
+</p>
 
 > A blazing fast and developer-friendly network port scanner written in Rust.
 
@@ -20,7 +21,9 @@
 ```bash
 git clone https://github.com/shvvkz/portscanx.git
 cd portscanx
-cargo install --path .
+make install
+cd ..
+rm -rf portscanx
 ```
 
 ---
@@ -42,8 +45,9 @@ portscanx 192.168.1.1 -p 20-1000
 Export results to JSON:
 
 ```bash
-portscanx 192.168.1.1 --json output.json
+portscanx 192.168.1.1 -o json
 ```
+*This will save the scan at portscanx.json*
 
 View help:
 
