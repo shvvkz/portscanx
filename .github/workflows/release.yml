@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags: [v*.*.*]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - run: cargo build --release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Binary
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./target/release/portscanx
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
