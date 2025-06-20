@@ -5,6 +5,19 @@ pub fn get_service_name(port: u16) -> Option<&'static str> {
     map.get(&port).copied()
 }
 
+pub fn parse_ports(input: &str) -> Vec<u16> {
+    if let Some((start, end)) = input.split_once('-') {
+        let start = start.trim().parse().unwrap_or(1);
+        let end = end.trim().parse().unwrap_or(65535);
+        (start..=end).collect()
+    } else if let Ok(single) = input.trim().parse() {
+        vec![single]
+    } else {
+        vec![]
+    }
+}
+
+
 fn known_services() -> HashMap<u16, &'static str> {
     HashMap::from([
         (7, "echo"),

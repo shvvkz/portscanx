@@ -29,7 +29,8 @@ pub async fn run_scan(options: ScanOptions) {
     while let Some(Ok((ip, port, port_status))) = tasks.next().await {
         results.add_result(ip, port, port_status);
     }
-    println!("✅ Scan finished in {}s\n", t0.elapsed().as_secs_f32());
+    println!("✅ Scan finished in {}s", t0.elapsed().as_secs_f32());
+    println!("Careful! Services names are not guaranteed to be accurate, as they are based on port numbers and may not reflect the actual service running on the port.\n");
     if options.output_format == crate::config::OutputFormat::Json {
         let json_output = crate::output::json::output_json(results, options.open_only);
         std::fs::write("portscanx.json", json_output).expect("Failed to write JSON output");
