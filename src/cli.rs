@@ -1,13 +1,16 @@
 use clap::Parser;
 
-use crate::{config::{OutputFormat, ScanOptions}, scanner::service::parse_ports};
+use crate::{
+    config::{OutputFormat, ScanOptions},
+    scanner::service::parse_ports,
+};
 
 #[derive(Parser, Debug)]
 #[command(
     name = "portscanx",
     version,
     disable_version_flag = true,
-    about = "A fast and flexible port scanner written in Rust.",
+    about = "A fast and flexible port scanner written in Rust."
 )]
 pub struct Cli {
     /// The IP address or hostname to scan.
@@ -33,6 +36,11 @@ pub struct Cli {
     /// Enable verbose output.
     #[arg(short, long)]
     pub verbose: bool,
+
+    #[arg(long)]
+    /// Show version information and exit.
+    #[arg(long = "version", action = clap::ArgAction::Version)]
+    pub version: Option<bool>,
 }
 
 impl From<Cli> for ScanOptions {

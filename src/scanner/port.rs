@@ -2,7 +2,7 @@ use std::net::{IpAddr, SocketAddr};
 use std::time::Duration;
 use tokio::net::TcpStream;
 
-#[derive(Debug, Clone, Copy, PartialEq,  Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PortStatus {
     Open,
     Closed,

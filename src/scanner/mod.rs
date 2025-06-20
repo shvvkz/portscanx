@@ -2,10 +2,10 @@ pub mod ip;
 pub mod port;
 pub mod service;
 
-use std::net::IpAddr;
-
 use crate::config::ScanOptions;
 use crate::scanner::{ip::expand_ips, port::scan_port};
+use owo_colors::OwoColorize;
+use std::net::IpAddr;
 
 use futures::stream::{FuturesUnordered, StreamExt};
 use tokio::task;
@@ -29,15 +29,18 @@ pub async fn run_scan(options: ScanOptions) {
     while let Some(Ok((ip, port, port_status))) = tasks.next().await {
         results.add_result(ip, port, port_status);
     }
-    println!("✅ Scan finished in {}s", t0.elapsed().as_secs_f32());
-    println!("Careful! Services names are not guaranteed to be accurate, as they are based on port numbers and may not reflect the actual service running on the port.\n");
+    println!("{} {} {:.3}s","✅".green(),"Scan finished in".bold(),t0.elapsed().as_secs_f32());
+
+    println!("{}\n{}", "⚠️  Service names may not be accurate.".bold().yellow(), "They are based only on port numbers, not on service detection.".dimmed()
+    );
+
     if options.output_format == crate::config::OutputFormat::Json {
         let json_output = crate::output::json::output_json(results, options.open_only);
         std::fs::write("portscanx.json", json_output).expect("Failed to write JSON output");
     } else if options.output_format == crate::config::OutputFormat::Csv {
         let csv_output = crate::output::csv::output_csv(results, options.open_only);
         std::fs::write("portscanx.csv", csv_output).expect("Failed to write CSV output");
-    } else if options.output_format == crate::config::OutputFormat::Terminal{
+    } else if options.output_format == crate::config::OutputFormat::Terminal {
         crate::output::terminal::output_terminal(results, options.open_only);
     }
 }

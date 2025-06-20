@@ -17,7 +17,6 @@ pub fn parse_ports(input: &str) -> Vec<u16> {
     }
 }
 
-
 fn known_services() -> HashMap<u16, &'static str> {
     HashMap::from([
         (7, "echo"),
