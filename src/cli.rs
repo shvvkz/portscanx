@@ -21,11 +21,11 @@ pub struct Cli {
     #[arg(short, long, value_name = "PORT/RANGE", default_value = "1-65535")]
     pub ports: String,
 
-    /// Timeout for each port scan in milliseconds (default: 1000).
-    #[arg(short, long, default_value_t = 1000)]
+    /// Timeout for each port scan in milliseconds.
+    #[arg(short, long, default_value_t = 500)]
     pub timeout: u64,
 
-    /// Output format: terminal, json, csv (default: terminal).
+    /// Output format: terminal, json, csv
     #[arg(short, long, default_value = "terminal")]
     pub output: String,
 
