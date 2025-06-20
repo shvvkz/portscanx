@@ -76,3 +76,9 @@ impl ScanResultHandler {
         }
     }
 }
+
+impl Default for ScanResultHandler {
+    fn default() -> Self {
+        Self::new()
+    }
+}

@@ -28,9 +28,8 @@ pub fn output_json(results: ScanResultHandler, only_open: bool) -> String {
             });
         }
     }
-    let json_str = serde_json::to_string_pretty(&output)
-        .unwrap_or_else(|_| String::from("Error generating JSON output"));
-    json_str
+    serde_json::to_string_pretty(&output)
+        .unwrap_or_else(|_| String::from("Error generating JSON output"))
 }
 
 #[derive(serde::Serialize, serde::Deserialize, Debug)]
