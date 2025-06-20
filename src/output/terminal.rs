@@ -17,7 +17,10 @@ pub fn output_terminal(results: ScanResultHandler, only_open: bool) {
         }
 
         for (ip, port) in &results.closed {
-            println!("{} {ip}:{port} → {}", "?".yellow(), "filtered".bold().yellow()
+            println!(
+                "{} {ip}:{port} → {}",
+                "?".yellow(),
+                "filtered".bold().yellow()
             );
         }
     }

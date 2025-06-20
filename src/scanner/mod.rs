@@ -29,9 +29,17 @@ pub async fn run_scan(options: ScanOptions) {
     while let Some(Ok((ip, port, port_status))) = tasks.next().await {
         results.add_result(ip, port, port_status);
     }
-    println!("{} {} {:.3}s","✅".green(),"Scan finished in".bold(),t0.elapsed().as_secs_f32());
+    println!(
+        "{} {} {:.3}s",
+        "✅".green(),
+        "Scan finished in".bold(),
+        t0.elapsed().as_secs_f32()
+    );
 
-    println!("{}\n{}", "⚠️  Service names may not be accurate.".bold().yellow(), "They are based only on port numbers, not on service detection.".dimmed()
+    println!(
+        "{}\n{}",
+        "⚠️  Service names may not be accurate.".bold().yellow(),
+        "They are based only on port numbers, not on service detection.".dimmed()
     );
 
     if options.output_format == crate::config::OutputFormat::Json {

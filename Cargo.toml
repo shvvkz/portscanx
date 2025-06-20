@@ -11,3 +11,8 @@ owo-colors = "4.2.1"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 tokio = { version = "*", features = ["full"] }
+
+[dev-dependencies]
+tokio = { version = "*", features = ["macros", "rt-multi-thread"] }
+assert_cmd = "*"
+predicates = "*"
