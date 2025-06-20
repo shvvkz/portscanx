@@ -1,6 +1,7 @@
 # portscanx
-
-![portscanx logo](https://i.imgur.com/wdyyjL6.png)
+<p align="center">
+    <img src="https://imgur.com/ZgMegPb.png" alt="portscanx logo">
+</p>
 
 > A blazing fast and developer-friendly network port scanner written in Rust.
 
@@ -11,7 +12,7 @@
 * ⚡ Fast scanning using async runtime
 * 🧠 Developer-oriented output
 * 📦 JSON export support
-* 🔍 Supports TCP and UDP scanning (UDP support in progress)
+* 🔍 TCP support (UDP is not included as it's rarely needed for developer or DevOps use cases (but we can discuss about it))
 
 ---
 
@@ -20,7 +21,9 @@
 ```bash
 git clone https://github.com/shvvkz/portscanx.git
 cd portscanx
-cargo install --path .
+make install
+cd ..
+rm -rf portscanx
 ```
 
 ---
@@ -42,8 +45,9 @@ portscanx 192.168.1.1 -p 20-1000
 Export results to JSON:
 
 ```bash
-portscanx 192.168.1.1 --json output.json
+portscanx 192.168.1.1 -o json
 ```
+*This will save the scan at portscanx.json*
 
 View help:
 
@@ -59,7 +63,6 @@ portscanx --help
 * [ ] Configurable parallelism (via CLI flag)
 * [ ] Add an update command to allow updating portscanx using the `-u` flag
 * [ ] Write documentation comments for functions and structures in the code
-* [ ] UDP support
 * [ ] Config file support
 
 ---
