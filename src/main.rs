@@ -17,7 +17,6 @@ async fn main() {
         return;
     }
 
-
     let _ = match &cli.target {
         Some(t) => t,
         None => {

@@ -36,10 +36,10 @@ pub fn update() -> Result<(), Box<dyn std::error::Error>> {
             .status()?;
 
         Command::new("sudo")
-            .args(["mv", tmp_path, &BINARY_PATH])
+            .args(["mv", tmp_path, BINARY_PATH])
             .status()?;
         Command::new("sudo")
-            .args(["chmod", "+x", &BINARY_PATH])
+            .args(["chmod", "+x", BINARY_PATH])
             .status()?;
 
         println!("Updated to version {}", tag);

@@ -1,5 +1,5 @@
-use crate::scanner::ScanResultHandler;
 use crate::scanner::service::get_service_name;
+use crate::scanner::ScanResultHandler;
 use owo_colors::OwoColorize;
 
 pub fn output_terminal(results: ScanResultHandler, only_open: bool) {

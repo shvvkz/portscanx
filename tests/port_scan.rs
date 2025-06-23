@@ -1,4 +1,4 @@
-use portscanx::scanner::port::{PortStatus, scan_port};
+use portscanx::scanner::port::{scan_port, PortStatus};
 use std::time::Duration;
 use tokio::net::TcpListener;
 

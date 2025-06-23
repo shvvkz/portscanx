@@ -46,7 +46,6 @@ pub struct Cli {
     pub version: Option<bool>,
 }
 
-
 impl From<Cli> for ScanOptions {
     fn from(cli: Cli) -> Self {
         let targets = vec![cli.target.unwrap()]; // Safe unwrap car déjà vérifié dans main
