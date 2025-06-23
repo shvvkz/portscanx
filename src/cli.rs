@@ -15,7 +15,7 @@ use crate::{
 pub struct Cli {
     /// The IP address or hostname to scan.
     #[arg(value_name = "IP/Hostname")]
-    pub target: String,
+    pub target: Option<String>,
 
     /// The port or range of ports to scan (e.g., 80, 1-1000).
     #[arg(short, long, value_name = "PORT/RANGE", default_value = "1-65535")]
@@ -37,15 +37,20 @@ pub struct Cli {
     #[arg(short, long)]
     pub verbose: bool,
 
-    #[arg(long)]
+    /// Update the application to the latest version.
+    #[arg(short = 'u', long = "update", action = clap::ArgAction::SetTrue, help = "Update the application to the latest version", default_value_t = false)]
+    pub update: bool,
+
     /// Show version information and exit.
     #[arg(long = "version", action = clap::ArgAction::Version)]
     pub version: Option<bool>,
 }
 
+
 impl From<Cli> for ScanOptions {
     fn from(cli: Cli) -> Self {
-        let targets = vec![cli.target];
+        let targets = vec![cli.target.unwrap()]; // Safe unwrap car déjà vérifié dans main
+
         let ports = parse_ports(&cli.ports);
 
         let output_format = match cli.output.as_str() {
@@ -60,7 +65,7 @@ impl From<Cli> for ScanOptions {
             timeout: std::time::Duration::from_millis(cli.timeout),
             verbose: cli.verbose,
             output_format,
-            parallelism: 100, // ou tu peux ajouter une option plus tard
+            parallelism: 100,
             open_only: cli.only_open,
         }
     }
